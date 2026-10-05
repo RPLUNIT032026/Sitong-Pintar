@@ -1,406 +1,378 @@
-1. Persona dan Kebutuhan Pengguna
-Pengguna	Kebutuhan
-Petugas kebersihan	Mengetahui tong yang penuh, persentase isi, dan waktu pembaruan tanpa memeriksa setiap tong secara manual.
-Admin/pengelola	Melihat status sistem, mengelola data tong, dan mengatur ambang batas.
-Petugas Kebersihan	Mengetahui tong yang penuh, persentase isi, dan waktu pembaruan tanpa memeriksa setiap tong secara manual.
-Admin/Pengelola	Melihat status sistem, mengelola data tong, dan mengatur ambang batas.
-2. Struktur Halaman / Sitemap
+# 🗑️ SMART BIN MONITORING
 
-Struktur halaman sistem dibuat sederhana agar pengguna dapat berpindah halaman dengan mudah.
+Sistem monitoring tong sampah berbasis digital yang membantu petugas kebersihan dan admin dalam memantau kondisi tong secara cepat dan efisien.
 
-2. Struktur halaman / sitemap
+---
+
+## 1. Persona dan Kebutuhan Pengguna
+
+| Pengguna               | Kebutuhan                                                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Petugas Kebersihan** | Mengetahui tong yang penuh, persentase isi, dan waktu pembaruan tanpa memeriksa setiap tong secara manual. |
+| **Admin / Pengelola**  | Melihat status sistem, mengelola data tong, dan mengatur ambang batas.                                     |
+
+---
+
+## 2. Sitemap
+
+```text
 LOGIN
   │
   ▼
 DASHBOARD
   │
   ├── Monitoring Tong
-  │     │
   │     └── Detail Tong
-  │            ├── Status
-  │            ├── Persentase
-@@ -20,130 +24,263 @@ DASHBOARD
+  │           ├── Status
+  │           ├── Persentase
+  │           ├── Digital Twin
+  │           └── Riwayat
+  │
+  ├── Riwayat Monitoring
+  │
   ├── Notifikasi
   │
   └── Pengaturan
-         │
-         ├── Ambang Batas
-         └── Kelola Data Tong
+        ├── Ambang Batas
+        └── Kelola Data Tong
+```
 
-3. Wireframe Dashboard
+---
 
-┌─────────────────────────────────────────────────────────────┐
-│  🗑️ SMART BIN MONITORING                 🔔  Admin ▼       │
-├───────────────┬─────────────────────────────────────────────┤
-│               │                                             │
-│  Dashboard    │  Dashboard                                  │
-│               │  Monitoring kondisi tong sampah             │
-│  Monitoring   │                                             │
-│               │  ┌──────────┐ ┌──────────┐ ┌──────────┐   │
-│  Riwayat      │  │   01     │ │   00     │ │   00     │   │
-│               │  │  Normal  │ │ Hampir   │ │  Penuh   │   │
-│  Notifikasi   │  │          │ │  Penuh   │ │          │   │
-│               │  └──────────┘ └──────────┘ └──────────┘   │
-│  Pengaturan   │                                             │
-│               │  Kondisi Tong                               │
-│               │  ┌───────────────────────────────────────┐ │
-│               │  │                                       │ │
-│               │  │          🗑️ DIGITAL TWIN              │ │
-│               │  │                                       │ │
-│               │  │             ███████                   │ │
-│               │  │             ███████                   │ │
-│               │  │             ███████                   │ │
-│               │  │             ███████                   │ │
-│               │  │             ███████                   │ │
-│               │  │             ───────                   │ │
-│               │  │                                       │ │
-│               │  │          65% TERISI                   │ │
-│               │  └───────────────────────────────────────┘ │
-│               │                                             │
-│               │  Status: 🟡 HAMPIR PENUH                   │
-│               │  Update terakhir: 09:42:15                 │
-│               │                                             │
-└───────────────┴─────────────────────────────────────────────┘
+# 3. LOGIN
 
-4. Komponen utama
-Dashboard merupakan halaman utama yang menampilkan kondisi tong secara ringkas.
+```text
+┌──────────────────────────────────────────────┐
+│                                              │
+│          🗑️ SMART BIN MONITORING             │
+│                                              │
+│          ┌────────────────────────┐          │
+│          │ Email                  │          │
+│          └────────────────────────┘          │
+│                                              │
+│          ┌────────────────────────┐          │
+│          │ Password               │          │
+│          └────────────────────────┘          │
+│                                              │
+│          ┌────────────────────────┐          │
+│          │         LOGIN          │          │
+│          └────────────────────────┘          │
+│                                              │
+└──────────────────────────────────────────────┘
+```
 
-┌─────────────────────────────────────────────────────────────────────┐
-│ 🗑️ SMART BIN MONITORING                              🔔  Admin ▼    │
-├───────────────────┬─────────────────────────────────────────────────┤
-│                   │                                                 │
-│  Dashboard        │  Dashboard                                      │
-│                   │  Monitoring kondisi tong sampah                 │
-│  Monitoring       │                                                 │
-│                   │  ┌──────────┐  ┌──────────┐  ┌──────────┐      │
-│  Riwayat          │  │    01    │  │    00    │  │    00    │      │
-│                   │  │  Normal  │  │ Hampir   │  │  Penuh   │      │
-│  Notifikasi       │  │          │  │  Penuh   │  │          │      │
-│                   │  └──────────┘  └──────────┘  └──────────┘      │
-│  Pengaturan       │                                                 │
-│                   │  Kondisi Tong                                   │
-│                   │  ┌───────────────────────────────────────────┐  │
-│                   │  │                                           │  │
-│                   │  │              🗑️ DIGITAL TWIN              │  │
-│                   │  │                                           │  │
-│                   │  │                 ███████                   │  │
-│                   │  │                 ███████                   │  │
-│                   │  │                 ███████                   │  │
-│                   │  │                 ███████                   │  │
-│                   │  │                 ███████                   │  │
-│                   │  │                 ───────                   │  │
-│                   │  │                                           │  │
-│                   │  │                  65%                      │  │
-│                   │  │                 TERISI                    │  │
-│                   │  └───────────────────────────────────────────┘  │
-│                   │                                                 │
-│                   │  Status: 🟡 HAMPIR PENUH                       │
-│                   │  Update terakhir: 09:42:15                     │
-│                   │                                                 │
-└───────────────────┴─────────────────────────────────────────────────┘
-4. Komponen Utama Dashboard
-A. Summary Card
+### Komponen
 
-| Card         | Informasi                             |
-| ------------ | ------------------------------------- |
-| Normal       | Jumlah tong dengan kondisi normal     |
-| Hampir Penuh | Jumlah tong mendekati batas           |
-| Penuh        | Jumlah tong yang sudah melewati batas |
+| Komponen | Fungsi               |
+| -------- | -------------------- |
+| Logo     | Identitas sistem     |
+| Email    | Input email pengguna |
+| Password | Input password       |
+| Login    | Masuk ke Dashboard   |
 
-B. Digital Twin
-Bagian tengah menampilkan bentuk digital tong sampah. Tingkat isian divisualisasikan secara vertikal.
-        ┌───────┐
-        │       │
-        │███████│ ← level sampah
-        │███████│
-        │███████│
-        │███████│
-        │       │
-        └───────┘
-           65%
+---
 
-5.  Halaman Detail Monitoring
+# 4. DASHBOARD
 
-┌─────────────────────────────────────────────────────────────┐
-│ ← Monitoring / Detail Tong                                  │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  TONG SAMPAH #001                         🟡 HAMPIR PENUH   │
-│                                                             │
-│       ┌───────────────┐       ┌────────────────────────┐   │
-│       │               │       │ Tingkat Kepenuhan      │   │
-│       │      🗑️       │       │                        │   │
-│       │               │       │       65%              │   │
-│       │    █████      │       │                        │   │
-│       │    █████      │       │ Jarak Sampah           │   │
-│       │    █████      │       │       XX cm             │   │
-│       │               │       │                        │   │
-│       └───────────────┘       └────────────────────────┘   │
-│                                                             │
-│  STATUS                                                     │
-│  🟢 Normal        🟡 Hampir Penuh        🔴 Penuh          │
-│                                                             │
-│  Update terakhir                                           │
-│  30 September 2026 • 09:42:15                              │
-│                                                             │
-│  ─────────────────────────────────────────────────────────  │
-│                                                             │
-│  Riwayat Kepenuhan                                          │
-│                                                             │
-│  09:42   █████████████████████ 65%                         │
-│  09:30   ██████████████████    58%                         │
-│  09:15   ███████████████       51%                         │
-│  09:00   ████████████          43%                         │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ 🗑️ SMART BIN MONITORING                         🔔  Admin ▼          │
+├────────────────┬─────────────────────────────────────────────────────┤
+│                │                                                     │
+│ 📊 Dashboard   │                    DASHBOARD                        │
+│                │                                                     │
+│ 🗑️ Monitoring  │  ┌────────────┐ ┌────────────┐ ┌────────────┐     │
+│    Tong        │  │ TOTAL TONG │ │    PENUH   │ │   NORMAL   │     │
+│                │  │     50     │ │      8     │ │     42     │     │
+│ 🕘 Riwayat     │  └────────────┘ └────────────┘ └────────────┘     │
+│                │                                                     │
+│ 🔔 Notifikasi  │  MONITORING TONG                                   │
+│                │                                                     │
+│ ⚙️ Pengaturan  │  ┌───────────────────────────────────────────────┐ │
+│                │  │ #001  Gedung A   ████████████░░  80%          │ │
+│                │  │       ⚠️ PERLU DIKOSONGKAN     10:30 WIB       │ │
+│                │  ├───────────────────────────────────────────────┤ │
+│                │  │ #002  Gedung B   ██████░░░░░░░  45%            │ │
+│                │  │       🟢 NORMAL                  10:32 WIB     │ │
+│                │  ├───────────────────────────────────────────────┤ │
+│                │  │ #003  Gedung C   █████████████  95%            │ │
+│                │  │       🔴 PENUH                   10:34 WIB     │ │
+│                │  └───────────────────────────────────────────────┘ │
+│                │                                                     │
+└────────────────┴─────────────────────────────────────────────────────┘
+```
 
-6. Sistem status UX
+### Informasi Dashboard
 
-0%                    70%          90%             100%
-│─────────────────────│────────────│────────────────│
-        NORMAL          HAMPIR PENUH       PENUH
+| Informasi       | Keterangan                             |
+| --------------- | -------------------------------------- |
+| Total Tong      | Jumlah seluruh tong yang terdaftar     |
+| Tong Penuh      | Jumlah tong yang melewati ambang batas |
+| Tong Normal     | Jumlah tong dalam kondisi normal       |
+| Persentase Isi  | Tingkat kepenuhan tong                 |
+| Status          | Kondisi tong saat ini                  |
+| Update Terakhir | Waktu data terakhir diperbarui         |
 
-. Notifikasi ketika penuh
-Ketika sensor mendeteksi kondisi penuh:
+---
 
-┌──────────────────────────────────────┐
-│ 🔔 PERINGATAN TONG SAMPAH            │
-│                                      │
-│ Tong #001 telah mencapai batas       │
-│ kepenuhan.                           │
-│                                      │
-│ Tingkat kepenuhan: 100%              │
-│                                      │
-│              [ Lihat Tong ]          │
-└──────────────────────────────────────┘
+# 5. MONITORING TONG
 
-7. Logika Estimasi Kepenuhan
-  Jika menggunakan sensor jarak dari bagian atas tong, persentase isi dapat diperkirakan dengan rumus: Persentase isi = ((H − d) / H) × 100%, dengan H adalah tinggi efektif bagian dalam tong dan d adalah jarak sensor ke permukaan sampah. H dan d harus menggunakan satuan yang sama. Nilai hasil perhitungan dibatasi pada rentang 0–100% dan perlu dikalibrasi melalui pengujian fisik.
-Catatan: rumus ini merupakan pendekatan untuk permukaan sampah yang relatif rata. Bentuk sampah yang tidak rata dapat menyebabkan pembacaan berubah-ubah, sehingga pengembangan berikutnya dapat menerapkan beberapa kali pembacaan dan perataan data.
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ MONITORING TONG                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ 🔍 Cari Tong...                       Filter: [Semua Status ▼]       │
+│                                                                      │
+├─────────┬──────────────┬────────────┬────────────────┬───────────────┤
+│ ID Tong │ Lokasi       │ Persentase │ Status         │ Update        │
+├─────────┼──────────────┼────────────┼────────────────┼───────────────┤
+│ #001    │ Gedung A     │ 80%        │ ⚠️ Peringatan  │ 10:30 WIB     │
+│ #002    │ Gedung B     │ 45%        │ 🟢 Normal      │ 10:32 WIB     │
+│ #003    │ Gedung C     │ 95%        │ 🔴 Penuh       │ 10:34 WIB     │
+│ #004    │ Gedung D     │ 30%        │ 🟢 Normal      │ 10:35 WIB     │
+└─────────┴──────────────┴────────────┴────────────────┴───────────────┘
+```
 
-8. Alur Sistem
+---
 
-Tahap	Proses
-1	Sampah masuk ke tong fisik.
-2	Sensor jarak membaca jarak permukaan sampah ke sensor.
-3	Mikrokontroler mengolah pembacaan dan menghitung perkiraan persentase isi berdasarkan tinggi tong hasil kalibrasi.
-4	Data dikirim melalui jaringan ke backend/database (teknologi ditentukan kelompok).
-5	Dashboard mengambil data dan memperbarui nilai/status.
-6	Model digital menampilkan kondisi tong sesuai data; status penuh memicu indikator/notifikasi.
-Summary card digunakan untuk memberikan informasi kondisi tong secara cepat.
+# 6. DETAIL TONG
 
-Card	Informasi
-Normal	Jumlah tong dengan kondisi normal
-Hampir Penuh	Jumlah tong yang mendekati batas
-Penuh	Jumlah tong yang sudah melewati batas
-Tampilan Summary Card
-┌──────────────┐   ┌──────────────┐   ┌──────────────┐
-│     01       │   │     00       │   │     00       │
-│              │   │              │   │              │
-│   NORMAL     │   │ HAMPIR PENUH │   │    PENUH     │
-└──────────────┘   └──────────────┘   └──────────────┘
-5. Digital Twin
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ DETAIL TONG #001                                                     │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ Lokasi       : Gedung A                                              │
+│ Status       : ⚠️ PERLU DIKOSONGKAN                                  │
+│ Persentase   : 80%                                                   │
+│ Update       : 10:30 WIB                                             │
+│                                                                      │
+│ ┌──────────────────────┐       ┌──────────────────────────────────┐ │
+│ │                      │       │ DIGITAL TWIN                     │ │
+│ │        🗑️            │       │                                  │ │
+│ │                      │       │           ┌────────┐             │ │
+│ │        80%           │       │           │ ██████ │             │ │
+│ │                      │       │           │ ██████ │             │ │
+│ │                      │       │           │ ██████ │             │ │
+│ └──────────────────────┘       │           └────────┘             │ │
+│                                │                                  │ │
+│                                └──────────────────────────────────┘ │
+│                                                                      │
+│ [Status] [Persentase] [Digital Twin] [Riwayat]                     │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
-Digital Twin merupakan representasi digital dari tong sampah fisik.
+---
 
-Tingkat isian ditampilkan secara vertikal berdasarkan hasil pembacaan sensor.
+# 7. RIWAYAT MONITORING
 
-          ┌─────────┐
-          │         │
-          │ ███████ │  ← Level sampah
-          │ ███████ │
-          │ ███████ │
-          │ ███████ │
-          │         │
-          └─────────┘
-              65%
-6. Halaman Detail Monitoring
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ RIWAYAT MONITORING                                                   │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ Tong: [ Semua Tong ▼ ]       Tanggal: [ 01/10/2026 - 04/10/2026 ]  │
+│                                                                      │
+├──────────────┬───────────┬────────────┬─────────────────────────────┤
+│ Waktu        │ ID Tong   │ Persentase │ Status                      │
+├──────────────┼───────────┼────────────┼─────────────────────────────┤
+│ 04/10 10:30  │ #001      │ 80%        │ ⚠️ Perlu Dikosongkan        │
+│ 04/10 10:25  │ #001      │ 75%        │ ⚠️ Perlu Dikosongkan        │
+│ 04/10 10:20  │ #001      │ 70%        │ 🟢 Normal                   │
+│ 04/10 10:15  │ #002      │ 45%        │ 🟢 Normal                   │
+└──────────────┴───────────┴────────────┴─────────────────────────────┘
+```
 
-Halaman ini menampilkan informasi lebih lengkap mengenai satu tong.
+---
 
-┌─────────────────────────────────────────────────────────────────────┐
-│ ← Monitoring / Detail Tong                                          │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  TONG SAMPAH #001                              🟡 HAMPIR PENUH       │
-│                                                                     │
-│       ┌─────────────────┐          ┌────────────────────────────┐   │
-│       │                 │          │ Tingkat Kepenuhan          │   │
-│       │       🗑️        │          │                            │   │
-│       │                 │          │          65%               │   │
-│       │    ███████      │          │                            │   │
-│       │    ███████      │          │ Jarak Sampah               │   │
-│       │    ███████      │          │          XX cm             │   │
-│       │                 │          │                            │   │
-│       └─────────────────┘          └────────────────────────────┘   │
-│                                                                     │
-│  STATUS                                                             │
-│                                                                     │
-│  🟢 Normal       🟡 Hampir Penuh       🔴 Penuh                    │
-│                                                                     │
-│  ─────────────────────────────────────────────────────────────────  │
-│                                                                     │
-│  Update terakhir                                                     │
-│  30 September 2026 • 09:42:15                                      │
-│                                                                     │
-│  ─────────────────────────────────────────────────────────────────  │
-│                                                                     │
-│  Riwayat Kepenuhan                                                  │
-│                                                                     │
-│  09:42   ██████████████████████████████  65%                      │
-│  09:30   ███████████████████████████     58%                      │
-│  09:15   ████████████████████████        51%                      │
-│  09:00   ████████████████████            43%                      │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-7. Sistem Status UX
+# 8. NOTIFIKASI
 
-Sistem menggunakan tiga kondisi utama:
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ NOTIFIKASI                                                            │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ 🔴 TONG #003                                                         │
+│    Tong sudah mencapai 95%. Segera lakukan pengosongan.              │
+│    10:34 WIB                                                         │
+│                                                                      │
+│ 🟡 TONG #001                                                         │
+│    Tong sudah mencapai 80% dan mendekati batas maksimum.             │
+│    10:30 WIB                                                         │
+│                                                                      │
+│ 🟢 TONG #002                                                         │
+│    Kondisi tong kembali normal.                                      │
+│    10:20 WIB                                                         │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
-0%                    70%          90%                  100%
-│─────────────────────│────────────│──────────────────────│
-        NORMAL          HAMPIR PENUH          PENUH
-Status
-🟢 NORMAL
-Tong masih dalam kondisi normal.
+---
 
+# 9. PENGATURAN
 
-🟡 HAMPIR PENUH
-Tong mendekati batas kepenuhan.
+## 9.1 Ambang Batas
 
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ PENGATURAN AMBANG BATAS                                      │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│ Normal                     [ 0% ─────────────── 70% ]         │
+│                                                              │
+│ Peringatan                [ 71% ────────────── 80% ]         │
+│                                                              │
+│ Penuh                     [ 81% ───────────── 100% ]         │
+│                                                              │
+│                   [ SIMPAN PENGATURAN ]                      │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
 
-🔴 PENUH
-Tong sudah mencapai batas kepenuhan.
+### Status Tong
 
-Catatan: nilai 70% dan 90% merupakan contoh visual ambang batas. Nilai sebenarnya dapat ditentukan melalui pengaturan Admin.
+| Persentase | Status        | Keterangan                    |
+| ---------: | ------------- | ----------------------------- |
+|      0–70% | 🟢 Normal     | Kondisi masih aman            |
+|     71–80% | 🟡 Peringatan | Tong mulai mendekati penuh    |
+|    81–100% | 🔴 Penuh      | Tong perlu segera dikosongkan |
 
-8. Notifikasi Ketika Tong Penuh
+---
 
-Ketika sensor mendeteksi kondisi penuh, sistem memberikan peringatan.
+# 10. KELOLA DATA TONG
 
-┌────────────────────────────────────────┐
-│ 🔔  PERINGATAN TONG SAMPAH             │
-├────────────────────────────────────────┤
-│                                        │
-│  Tong #001 telah mencapai batas        │
-│  kepenuhan.                            │
-│                                        │
-│  Tingkat kepenuhan: 100%               │
-│                                        │
-│          ┌────────────────┐            │
-│          │   LIHAT TONG   │            │
-│          └────────────────┘            │
-│                                        │
-└────────────────────────────────────────┘
-9. Logika Estimasi Kepenuhan
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│ KELOLA DATA TONG                                  [ + Tambah Tong ]  │
+├─────────┬──────────────────┬──────────────┬─────────────────────────┤
+│ ID Tong │ Lokasi           │ Status       │ Aksi                    │
+├─────────┼──────────────────┼──────────────┼─────────────────────────┤
+│ #001    │ Gedung A         │ Aktif        │ [Edit] [Hapus]          │
+│ #002    │ Gedung B         │ Aktif        │ [Edit] [Hapus]          │
+│ #003    │ Gedung C         │ Aktif        │ [Edit] [Hapus]          │
+│ #004    │ Gedung D         │ Nonaktif     │ [Edit] [Hapus]          │
+└─────────┴──────────────────┴──────────────┴─────────────────────────┘
+```
 
-Jika menggunakan sensor jarak dari bagian atas tong, persentase isi dapat diperkirakan menggunakan rumus:
+---
 
-Persentase Isi = ((H - d) / H) × 100%
+# 11. ALUR PENGGUNA
 
-Keterangan:
+```text
+                    ┌─────────────┐
+                    │    LOGIN    │
+                    └──────┬──────┘
+                           │
+                           ▼
+                 ┌──────────────────┐
+                 │     DASHBOARD    │
+                 └────────┬─────────┘
+                          │
+          ┌───────────────┼────────────────┐
+          │               │                │
+          ▼               ▼                ▼
+ ┌────────────────┐ ┌──────────────┐ ┌──────────────┐
+ │ Monitoring     │ │ Notifikasi   │ │ Pengaturan   │
+ │ Tong           │ │              │ │              │
+ └───────┬────────┘ └──────────────┘ └──────┬───────┘
+         │                                   │
+         ▼                         ┌─────────┴──────────┐
+ ┌────────────────┐                │                    │
+ │ Detail Tong    │                ▼                    ▼
+ └───────┬────────┘         ┌─────────────┐     ┌──────────────┐
+         │                  │ Ambang      │     │ Kelola Data  │
+         ├─────────────┐    │ Batas       │     │ Tong         │
+         │             │    └─────────────┘     └──────────────┘
+         ▼             ▼
+   ┌──────────┐  ┌──────────┐
+   │ Digital  │  │ Riwayat  │
+   │ Twin     │  │          │
+   └──────────┘  └──────────┘
+```
 
-H = Tinggi efektif bagian dalam tong
+---
 
-d = Jarak sensor ke permukaan sampah
-Alur Perhitungan
-┌──────────────────────┐
-│ Tinggi Tong (H)      │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ Jarak Sensor (d)     │
-└──────────┬───────────┘
-           │
-           ▼
-┌────────────────────────────┐
-│ ((H - d) / H) × 100%       │
-└──────────┬─────────────────┘
-           │
-           ▼
-┌────────────────────────────┐
-│ Batasi nilai 0% - 100%     │
-└──────────┬─────────────────┘
-           │
-           ▼
-┌────────────────────────────┐
-│ Persentase Kepenuhan       │
-└────────────────────────────┘
+# 12. KOMPONEN UI
 
-H dan d harus menggunakan satuan yang sama. Nilai hasil perhitungan dibatasi pada rentang 0–100% dan perlu dikalibrasi melalui pengujian fisik.
+| Komponen         | Fungsi                            |
+| ---------------- | --------------------------------- |
+| **Sidebar**      | Navigasi utama sistem             |
+| **Header**       | Nama sistem, notifikasi, dan akun |
+| **Card**         | Menampilkan ringkasan informasi   |
+| **Table**        | Menampilkan data tong             |
+| **Progress Bar** | Menampilkan persentase isi tong   |
+| **Badge Status** | Menunjukkan kondisi tong          |
+| **Filter**       | Menyaring data                    |
+| **Search**       | Mencari tong                      |
+| **Button**       | Menjalankan aksi                  |
+| **Notification** | Memberikan peringatan             |
 
-Rumus merupakan pendekatan untuk permukaan sampah yang relatif rata. Bentuk sampah yang tidak rata dapat menyebabkan pembacaan berubah-ubah, sehingga pengembangan berikutnya dapat menerapkan beberapa kali pembacaan dan perataan data.
+---
 
-10. Alur Sistem
+# 13. STATUS SISTEM
 
-Berikut alur utama dari sampah masuk sampai data ditampilkan pada Dashboard.
+| Status            | Persentase | Arti                          |
+| ----------------- | ---------: | ----------------------------- |
+| 🟢 **NORMAL**     |      0–70% | Tong masih dalam kondisi aman |
+| 🟡 **PERINGATAN** |     71–80% | Tong mendekati batas maksimum |
+| 🔴 **PENUH**      |    81–100% | Tong perlu segera dikosongkan |
 
-                    ┌─────────────────────┐
-                    │    TONG FISIK       │
-                    │                     │
-                    │   Sampah masuk      │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   SENSOR JARAK      │
-                    │                     │
-                    │ Membaca jarak       │
-                    │ permukaan sampah    │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   MIKROKONTROLER    │
-                    │                     │
-                    │ Mengolah data       │
-                    │ sensor               │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ PERHITUNGAN         │
-                    │ KEPEUnUHAN          │
-                    │                     │
-                    │ Persentase isi      │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │  JARINGAN / BACKEND │
-                    │                     │
-                    │ Mengirim dan        │
-                    │ menyimpan data      │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │      DATABASE       │
-                    │                     │
-                    │ Data monitoring     │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │     DASHBOARD       │
-                    │                     │
-                    │ Persentase          │
-                    │ Status              │
-                    │ Digital Twin        │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                       ┌──────────────┐
-                       │ Status Penuh?│
-                       └──────┬───────┘
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-                   TIDAK                YA
-                    │                   │
-                    ▼                   ▼
-             ┌─────────────┐    ┌─────────────────┐
-             │ Update Data │    │   NOTIFIKASI    │
-             │ Dashboard   │    │      PENUH      │
-             └─────────────┘    └─────────────────┘
+---
+
+# 14. FITUR BERDASARKAN PENGGUNA
+
+| Fitur                   | Petugas | Admin |
+| ----------------------- | :-----: | :---: |
+| Login                   |    ✓    |   ✓   |
+| Dashboard               |    ✓    |   ✓   |
+| Monitoring Tong         |    ✓    |   ✓   |
+| Detail Tong             |    ✓    |   ✓   |
+| Digital Twin            |    ✓    |   ✓   |
+| Riwayat Monitoring      |    ✓    |   ✓   |
+| Notifikasi              |    ✓    |   ✓   |
+| Pengaturan Ambang Batas |    —    |   ✓   |
+| Kelola Data Tong        |    —    |   ✓   |
+
+---
+
+# 15. PRINSIP DESAIN
+
+### 1. Simple
+
+Tampilan sederhana dan mudah dipahami.
+
+### 2. Informative
+
+Informasi penting seperti persentase, status, dan waktu update harus terlihat jelas.
+
+### 3. Responsive
+
+Sistem dapat digunakan pada desktop, tablet, maupun perangkat mobile.
+
+### 4. Consistent
+
+Warna, ikon, tombol, dan komponen digunakan secara konsisten.
+
+### 5. Easy to Monitor
+
+Petugas dapat mengetahui kondisi tong dengan cepat tanpa membuka banyak halaman.
+
+---
+
+# 16. TUJUAN SISTEM
+
+> **Smart Bin Monitoring membantu petugas kebersihan mengetahui kondisi tong secara cepat, akurat, dan efisien tanpa harus memeriksa setiap tong secara manual.**
+
+---
+
+## Struktur File
+
+```text
+smart-bin-monitoring/
+│
+└── README.md
+```
+
+**Semua rancangan, sitemap, wireframe, fitur, tabel, dan alur pengguna berada dalam satu file `README.md`.**
