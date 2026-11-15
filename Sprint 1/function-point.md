@@ -1,23 +1,3 @@
-# Perhitungan Function Point (FP) - Sistem Monitoring Tong Sampah
-
-Dokumen ini menghitung ukuran fungsional aplikasi monitoring tong sampah berbasis data sensor menggunakan metode Function Point (acuan: IFPUG). Cakupan: **Sprint 1**.
-
-> **Status:** estimasi awal. Karena kebutuhan masih tahap rancangan, nilai DET, FTR, RET, dan faktor penyesuaian bersifat asumsi dan harus diperbarui setelah detail fitur, data, dan kompleksitas dikonfirmasi.
-
-## Daftar Isi
-
-1. [Langkah Perhitungan](#1-langkah-perhitungan)
-2. [Identifikasi Fungsi Data (ILF dan EIF)](#2-identifikasi-fungsi-data-ilf-dan-eif)
-3. [Identifikasi Fungsi Transaksi (EI, EO, EQ)](#3-identifikasi-fungsi-transaksi-ei-eo-eq)
-4. [Unadjusted Function Point (UFP)](#4-unadjusted-function-point-ufp)
-5. [Faktor Penyesuaian (VAF)](#5-faktor-penyesuaian-value-adjustment-factor)
-6. [Hasil Akhir (Adjusted FP)](#6-hasil-akhir-adjusted-function-point)
-7. [Analisis Sensitivitas](#7-analisis-sensitivitas)
-8. [Perbandingan dengan Estimasi Awal](#8-perbandingan-dengan-estimasi-awal)
-9. [Asumsi dan Catatan Validasi](#9-asumsi-dan-catatan-validasi)
-
----
-
 ## 1. Langkah Perhitungan
 
 1. Identifikasi fungsi data: **ILF** dan **EIF**.
